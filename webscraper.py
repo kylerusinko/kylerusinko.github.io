@@ -1,4 +1,5 @@
 import requests
+import csv
 from bs4 import BeautifulSoup
 
 # Obtain URL and keywords
@@ -13,7 +14,12 @@ soup = BeautifulSoup(response.text, 'html.parser')
 for paragraph in soup.find_all('p'):
     for keyword in keywords:
         if keyword.strip().lower() in paragraph.get_text().strip().lower():
+            results = paragraph.get_text().strip()
             print(f"Keyword '{keyword.strip()}' found in paragraph: {paragraph.get_text().strip()}")
-        with open('webscrape' + name + '.csv', 'w') as text_file:
-            text_file.write(str(keyword.strip()))
+        with open('webscrape.csv', 'w', newline='') as text_file:
+            writer = csv.writer(text_file)
+            for string in results:
+                writer.writerow([string])
+
+            ## text_file.write(str(keyword.strip()))
 
