@@ -4,11 +4,27 @@
     <head>
     <title>Web Scraper</title>
 	<h1> Web Scraper </h1>
+    <link rel="stylesheet" href="/styles.css"> 
 	<link rel="stylesheet" 	href="https://pyscript.net/latest/pyscript.css" />
-	<script defer 	src="https://pyscript.net/latest/pyscript.js"></script> 
+	<!-- <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
     </head>
     	<body>
-    		<py-script src="/webscraper.py"></py-script>
-            <a style="text-decoration: underline;" href="https://github.com/pyscript/pyscript/issues/257#issuecomment-1119595062">this reference</a>
+    		
+
+            <form action="/action_page.php">
+                <label for="websiteInput">What website do you want to scrape?</label>
+                <br>
+                <textarea id="websiteInput" name="websiteInput" rows="4" cols="50">
+                </textarea><br><br>
+                <label for="keywords">Keywords</label>
+                <br>
+                <input type="text" id="keywords" name="keywords"><br><br>
+                <input type="submit" value="Scrape!">
+              </form> 
+
+              <py-script src="/webscraper.py">
+                
+              </py-script>
+
     	</body>
     </html>

@@ -14,3 +14,6 @@ for paragraph in soup.find_all('p'):
     for keyword in keywords:
         if keyword.strip().lower() in paragraph.get_text().strip().lower():
             print(f"Keyword '{keyword.strip()}' found in paragraph: {paragraph.get_text().strip()}")
+        with open('webscrape' + name + '.csv', 'w') as text_file:
+            text_file.write(str(keyword.strip()))
+
