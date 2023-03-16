@@ -1,3 +1,6 @@
+## Kyle Rusinko
+## Web Scraper Senior Capstone
+## Last Updated: March 16, 2023
 import requests
 import csv
 from bs4 import BeautifulSoup

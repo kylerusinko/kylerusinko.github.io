@@ -1,4 +1,3 @@
-
     <!doctype html>
     <html lang="en">
     <head>
@@ -6,7 +5,7 @@
 	<h1> Web Scraper </h1>
     <link rel="stylesheet" href="/styles.css"> 
 	<link rel="stylesheet" 	href="https://pyscript.net/latest/pyscript.css" />
-	<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+	<script defer src="https://pyscript.net/latest/pyscript.js"></script>   
     </head>
     	<body>
 
@@ -19,11 +18,14 @@
                 <br>
                 <input type="text" id="keywords" name="keywords"><br><br>
                 <input type="submit" value="Scrape!">
-              </form> 
-
-              <py-script src="/webscraper.py">
-                
-              </py-script>
+            </form> 
+              
+            
+            <py-script src="/webscraper.py">
+                <py-env>
+                    - requests
+                </py-env>
+            </py-script>
 
     	</body>
     </html>
