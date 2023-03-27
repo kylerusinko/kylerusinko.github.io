@@ -1,0 +1,6 @@
+{
+    "python.languageServer": "Default",
+    "vsintellicode.features.python.deepLearning": "enabled",
+    "jupyter.exportWithOutputEnabled": false,
+    "python.envFile": "${workspaceFolder}/code/venv/bin/python"
+}

@@ -2,7 +2,6 @@
 # Web Scraper Senior Capstone
 # Last Updated: March 25, 2023
 import csv
-import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from pyscript import *

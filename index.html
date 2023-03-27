@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-    <script>await pyodide.loadPackage('beautifulsoup4')</script>
-
+    <script src="main.js"></script>
 
     <nav>
         <ul>
@@ -33,18 +32,19 @@
             <input type="text" id="keywords" name="keywords"><br><br>
         </form>
 
-        <script type="text/javascript">
-            async function loadPythonCode() {
-                const response = await fetch('webscraper.py');
-                const pythonCode = await response.text();
-                return pythonCode;
-              }
+        <!-- <py-script src="./webscrapertesting.py"></py-script> -->
+
+        <script>
+            function scrape() {
+                const websites = ['https://www.example.com', 'https://www.example.org'];
+                const keywords = ['example', 'test'];
+                scrapeWebsites(websites, keywords).then((results) => {
+                    console.log(results);
+                });
+            }
         </script>
 
-        <py-script src="./webscraper.py"></py-script>
-
-
-        <button type="submit" id="scrapeButton" onClick=>Scrape!</button>
+        <button type="submit" id="scrapeButton" onClick="scrape()">Scrape!</button>
 
     </div>
 
