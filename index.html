@@ -4,11 +4,9 @@
 <head>
     <title>Web Scraper</title>
     <h1> Web Scraper </h1>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.22.1/full/pyodide.js"></script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-    <script type="module" src="./main_copy.js"></script>
+    <script type="module" src="./main.js"></script>
 
     <nav>
         <ul>
@@ -32,70 +30,12 @@
             <input type="text" id="keywords" name="keywords"><br><br>
         </form>
 
-        <!-- <py-script src="./webscrapertesting.py"></py-script> -->
-
         <button type="submit" id="scrapeButton">Scrape!</button>
 
     </div>
 
 
     <div id="output"></div>
-
-    <!--
-        <py-config>
-        [[fetch]]
-        files = ["./webscraper.py"]
-        </py-config>
-        <py-script>
-            from webscraper import lets_go_scraping
-            print(lets_go_scraping())
-        </py-script>
-    -->
-    <!--
-            <script>
-                <pyscript>
-                import requests
-                import csv
-                from bs4 import BeautifulSoup
-                from pyscript import *
-
-                def lets_go_scraping():
-                    #Obtain URL and keywords
-                    url = input("Enter the URL you want to scrape: ")
-                    keywords = input("Enter the keywords you want to search for, separated by commas: ").split(",")
-
-                    # Send a GET request to the URL and parse the response with Beautiful Soup
-                    try:
-                        response = requests.get(url)
-                        soup = BeautifulSoup(response.text, 'html.parser')
-                    except:
-                        print("Error parsing information")
-
-                    # Find all the paragraphs in the HTML and search for the keywords in them
-
-                    for paragraph in soup.find_all('p'):
-                        for keyword in keywords:
-                            try:
-                                if keyword.strip().lower() in paragraph.get_text().strip().lower():
-                                results = paragraph.get_text().strip()
-                                print(f"Keyword '{keyword.strip()}' found in paragraph: {paragraph.get_text().strip()}")
-                            except:
-                                print("Error found when scraping")
-                            try:
-                                with open('webscrape.csv', 'w', newline='') as text_file:
-                                    writer = csv.writer(text_file)
-                                    for string in results:
-                                        writer.writerow([string])
-                            except:
-                                print("Error writing to CSV file")
-                                ## text_file.write(str(keyword.strip()))
-                    
-                </pyscript>
-            </script> -->
-
-
-
-
 
 </body>
 
