@@ -2,41 +2,34 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
     <title>Web Scraper</title>
-    <h1> Web Scraper </h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="./main_testing.js"></script>
+</head>
 
+<header>
+    <h1> Web Scraper </h1>
     <nav>
         <ul>
             <li><a href="/index.html">Main</a></li>
             <li><a href="/how-to.html">How-To</a></li>
         </ul>
     </nav>
-
-</head>
+</header>
 
 <body>
-
-    <div id="mainForm">
-        <form action="/scraped_data.html">
-            <label for="websiteInput">What website do you want to scrape?</label>
-            <br>
-            <textarea id="websiteInput" name="websiteInput" rows="10" cols="70">
-                </textarea><br><br>
-            <label for="keywords">Keywords</label>
-            <br>
-            <input type="text" id="keywords" name="keywords"><br><br>
-        </form>
-
-        <button type="submit" id="scrapeButton">Scrape!</button>
-
+    <div class="container">
+        <label for="websitesInput">Websites (separate with commas):</label>
+        <input type="text" id="websitesInput" name="websitesInput">
+        <br><br>
+        <label for="keywordsInput">Keywords (separate with commas):</label>
+        <input type="text" id="keywordsInput" name="keywordsInput">
+        <br><br>
+        <button id="scrapeButton">Scrape</button>
+        <div id="output"></div>
     </div>
-
-
-    <div id="output"></div>
-
 </body>
 
 </html>

@@ -1,44 +1,94 @@
-head {
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background-color: whitesmoke;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: black;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    background-image: url('/simon-berger-twukN12EN7c-unsplash.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
 }
 
-h1 {
-  color: green;
-  text-align: center;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
 }
 
-ul {
-  list-style-type: none;
-  text-align: center;
-  background-color: green;
-  padding: 1%;
-  font-weight: 800;
+header h1 {
+    font-size: 2rem;
 }
 
-a:visited, a:link {
-  color: white;
-  text-decoration: none;
+nav ul {
+    list-style: none;
+    display: flex;
 }
 
-a:hover {
-  color: black;
-  background: white;
-  text-decoration: none;
+nav li {
+    margin-left: 20px;
 }
 
-
-li {
-  display: inline;
-  margin: 10%;
-  font-size: large;
+nav a {
+    text-decoration: none;
+    color: #333;
 }
 
-.mainForm {
-  margin: 10%;
+nav a:hover {
+    color: #555;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.container label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.container button {
+    display: block;
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.container button:hover {
+    background-color: #ef9362;
+}
+
+#output {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    line-height: 1.5;
 }
