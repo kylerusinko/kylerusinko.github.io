@@ -2,7 +2,7 @@ async function scrapeWebsites(websites, keywords) {
   const results = [];
 
   for (const website of websites) {
-    const response = await fetch(website);
+    const response = await fetch('proxy.php?url=' + encodeURIComponent(website));
     const html = await response.text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
 
