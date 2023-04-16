@@ -1,2 +1,2 @@
-http_headers:
+cors:
   Access-Control-Allow-Origin: "*"
