@@ -1,2 +1,6 @@
-cors:
-  Access-Control-Allow-Origin: "*"
+defaults:
+  - scope:
+      path: ""
+    values:
+      headers:
+        Access-Control-Allow-Origin: "*"
