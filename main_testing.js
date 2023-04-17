@@ -17,13 +17,11 @@ async function scrapeWebsites(websites, keywords) {
         const sentence = sentences[i];
         if (sentence.toLowerCase().includes(keyword.toLowerCase())) {
           found = true;
-          const sentenceBefore = sentences[i - 1];
-          const sentenceAfter = sentences[i + 1];
+          const sentenceWithTag = sentence.replace(new RegExp(`(${keyword})`, 'gi'), '<strong>$1</strong>');
+          const sentenceWithoutTag = sentenceWithTag.replace(/(<[^>]+>|&nbsp;)/gi, '');
           sentenceIndices.push({
             index: i,
-            sentence: sentence,
-            before: sentenceBefore,
-            after: sentenceAfter
+            sentence: sentenceWithoutTag.trim(),
           });
         }
       }
@@ -61,7 +59,7 @@ scrapeButton.addEventListener('click', () => {
         for (const sentenceIndex of result.sentenceIndices) {
           const sentence = sentenceIndex.sentence.replace(new RegExp(`(${result.keyword})`, 'gi'), '<strong>$1</strong>');
           html += '<li>';
-          html += `<p>${sentenceIndex.before || ''} ${sentence} ${sentenceIndex.after || ''}</p>`;
+          html += `<p>${sentence}</p>`;
           html += '</li>';
         }
 
@@ -76,4 +74,3 @@ scrapeButton.addEventListener('click', () => {
     keywordsInput.value = '';
   });
 });
-
