@@ -7,7 +7,7 @@ async function scrapeWebsites(websites, keywords) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
 
     const content = doc.body.textContent;
-    const sentences = content.split('. '); // split content into sentences
+    const sentences = content.split('. ');
 
     for (const keyword of keywords) {
       let found = false;
