@@ -24,7 +24,6 @@ async function scrapeWebsites(websites, keywords) {
           let startIndex = Math.max(0, keywordIndex - 10);
           let endIndex = Math.min(sentenceWords.length, keywordIndex + 11);
 
-          // Stop at punctuation, script tags, or semi-colon/colon
           for (let j = keywordIndex - 1; j >= startIndex; j--) {
             const word = sentenceWords[j];
             if (/^[.;:]$/.test(word) || /^<script/.test(word)) {

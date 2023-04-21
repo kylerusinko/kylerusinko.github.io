@@ -89,6 +89,7 @@ nav a:hover {
 
 #output {
     margin-top: 20px;
+    padding-bottom: 12%;
     font-size: 1.2rem;
     line-height: 1.5;
 }
