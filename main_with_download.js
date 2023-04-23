@@ -24,6 +24,7 @@ async function scrapeWebsites(websites, keywords) {
           let startIndex = Math.max(0, keywordIndex - 10);
           let endIndex = Math.min(sentenceWords.length, keywordIndex + 11);
 
+          // Stop at punctuation, script tags, or semi-colon/colon
           for (let j = keywordIndex - 1; j >= startIndex; j--) {
             const word = sentenceWords[j];
             if (/^[.;:]$/.test(word) || /^<script/.test(word)) {
@@ -52,24 +53,33 @@ async function scrapeWebsites(websites, keywords) {
         website: website,
         keyword: keyword,
         found: found,
-        sentenceIndices: sentenceIndices
+        sentenceIndices: sentenceIndices,
+        html: html // store the entire HTML content of the website
       });
     }
   }
 
+
   return results;
 }
 
-function downloadHTML(html) {
-  const filename = 'scraped.html';
-  const element = document.createElement('a');
-  element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(html));
-  element.setAttribute('download', filename);
-  element.style.display = 'none';
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
+function downloadHTML(website, results) {
+  const filename = `${website}.html`;
+  const matchingResult = results.find(result => result.website === website);
+
+  if (matchingResult) {
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(matchingResult.html));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  } else {
+    console.error(`No matching result found for website '${website}'.`);
+  }
 }
+
 
 const scrapeButton = document.getElementById('scrapeButton');
 const output = document.getElementById('output');
@@ -105,10 +115,29 @@ scrapeButton.addEventListener('click', () => {
     output.innerHTML = html;
     const downloadButton = document.createElement('button');
     downloadButton.textContent = 'Download HTML';
-    downloadButton.addEventListener('click', () => {
-      downloadHTML(output.innerHTML);
+    downloadButton.addEventListener('click', async () => {
+      const results = await scrapeWebsites(websites, keywords);
+      let html = '';
+    
+      for (const result of results) {
+        if (result.found) {
+          const response = await fetch(result.website);
+          const websiteHtml = await response.text();
+          const websiteDoc = new DOMParser().parseFromString(websiteHtml, 'text/html');
+          const websiteTitle = websiteDoc.title;
+          html += `<h3>${websiteTitle} - ${result.keyword}</h3>`;
+          html += result.sentenceIndices.map(sentenceIndex => {
+            const sentence = sentenceIndex.sentence.replace(new RegExp(`(${result.keyword})`, 'gi'), '<strong>$1</strong>');
+            return `<p>${sentence}</p>`;
+          }).join('');
+        }
+      }
+    
+      downloadHTML(websites[0], results); // Pass the website and results variables to downloadHTML()
     });
+    
     output.appendChild(downloadButton);
+
 
     websitesInput.value = '';
     keywordsInput.value = '';
