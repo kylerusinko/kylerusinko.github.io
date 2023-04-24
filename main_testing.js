@@ -13,7 +13,7 @@ async function getSynonyms(word) {
   }
 }
 
-async function scrapeIt(websites, keywords) {
+async function scrapeIt(websites, keywords, useSynonyms) {
   const resultArray = [];
 
   for (const website of websites) {
@@ -63,7 +63,8 @@ async function scrapeIt(websites, keywords) {
         }
       }
 
-      if (!found) {
+      console.log("UseSynonyms is " + useSynonyms);
+      if (!found && useSynonyms) {
         const synonyms = await getSynonyms(keyword);
         for (const synonym of synonyms) {
           for (let i = 0; i < sentences.length; i++) {
@@ -141,12 +142,14 @@ const scrapeButton = document.getElementById('scrapeButton');
 const output = document.getElementById('output');
 const websitesInput = document.getElementById('websitesInput');
 const keywordsInput = document.getElementById('keywordsInput');
+const synonymSwitch = document.getElementById('synonymSwitch');
 
 scrapeButton.addEventListener('click', () => {
   const websites = websitesInput.value.split(',');
   const keywords = keywordsInput.value.split(',');
+  const useSynonyms = synonymSwitch.checked;
 
-  scrapeIt(websites, keywords).then((resultArray) => {
+  scrapeIt(websites, keywords, useSynonyms).then((resultArray) => {
     let html = '';
 
     for (const result of resultArray) {
@@ -172,7 +175,7 @@ scrapeButton.addEventListener('click', () => {
     const downloadButton = document.createElement('button');
     downloadButton.textContent = 'Download HTML';
     downloadButton.addEventListener('click', async () => {
-      const resultArray = await scrapeIt(websites, keywords);
+      const resultArray = await scrapeIt(websites, keywords, useSynonyms);
       let html = '';
 
       for (const result of resultArray) {
