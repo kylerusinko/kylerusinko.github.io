@@ -93,6 +93,7 @@ nav a:hover {
     font-size: 1.2rem;
     line-height: 1.5;
 }
+
 footer {
     display: flex;
     justify-content: space-between;
@@ -103,30 +104,98 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-  }
-  
-  footer p {
+}
+
+footer p {
     font-size: 2rem;
-  }
-  
-  footer ul {
+}
+
+footer ul {
     list-style: none;
     display: flex;
-  }
-  
-  footer li {
+}
+
+footer li {
     margin-left: 20px;
-  }
-  
-  footer a {
+}
+
+footer a {
     text-decoration: none;
     color: #333;
-  }
-  
-  footer a:hover {
+}
+
+footer a:hover {
     color: #555;
-  }
-  .synonym {
+}
+
+.synonym {
     font-weight: bold;
-  }  
-  
+}
+
+/* Adapted from https://www.w3schools.com/howto/howto_css_switch.asp */
+.switch {
+    display: inline;
+    width: 60px;
+    height: 34px;
+    float: left;
+    position: relative;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    cursor: pointer;
+    transition: .3s;
+    background-color: black;
+    -webkit-transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .3s;
+    transition: .3s;
+
+}
+
+input:checked+.slider {
+    background-color: orange;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px orange;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(25px);
+    -ms-transform: translateX(25px);
+    transform: translateX(25px);
+}
+
+.slider.round {
+    border-radius: 32px;
+    float: left;
+}
+
+.slider.round:before {
+    border-radius: 49%;
+}
+
+.switch-text {
+    display: inline;
+    padding-left: 1%;
+}
