@@ -126,4 +126,7 @@ footer {
   footer a:hover {
     color: #555;
   }
+  .synonym {
+    font-weight: bold;
+  }  
   
