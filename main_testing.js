@@ -211,7 +211,9 @@ scrapeButton.addEventListener('click', () => {
         }
       }
 
-      downloadHTML(websites[0], resultArray);
+      for (let i = 0; i < websites.length; i++) {
+        downloadHTML(websites[i], resultArray);
+      }
     });
 
     output.appendChild(downloadButton);
