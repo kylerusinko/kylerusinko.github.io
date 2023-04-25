@@ -1,15 +1,15 @@
 async function getSynonyms(word) {
   const apiEndpoint = `https://api.datamuse.com/words?rel_syn=${word}`;
   try {
-    const response = await fetch(apiEndpoint);
+    const response = await fetch(apiEndpoint); // Adapted from https://rapidapi.com/guides/fetch-api-async-await
     if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
+      throw new Error(`Error ${response.status}`);
     }
     const json = await response.json();
     return json.map(obj => obj.word);
-  } catch (a) {
-    console.log(a);
-    return [];
+  }
+  catch (a) {
+    return "";
   }
 }
 
