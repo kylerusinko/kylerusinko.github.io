@@ -63,7 +63,6 @@ async function scrapeIt(websites, keywords, useSynonyms) {
         }
       }
 
-      console.log("UseSynonyms is " + useSynonyms);
       if (!found && useSynonyms) {
         const synonyms = await getSynonyms(keyword);
         for (const synonym of synonyms) {
@@ -127,8 +126,28 @@ function downloadHTML(website, resultArray) {
   const matchingResult = resultArray.find(result => result.website === website);
 
   if (matchingResult) {
+    let html = '';
+    const keywords = matchingResult.keyword.split(',');
+
+    const paragraphs = matchingResult.html.match(/<p>.*?<\/p>/gs);
+
+    for (const paragraph of paragraphs) {
+      for (const keyword of keywords) {
+        const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+        if (paragraph.match(regex)) {
+          html += paragraph;
+          break;
+        }
+      }
+    }
+
+    for (const keyword of keywords) {
+      const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+      html = html.replace(regex, `<strong>${keyword}</strong>`);
+    }
+
     const htmlElement = document.createElement('a');
-    htmlElement.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(matchingResult.html));
+    htmlElement.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(html));
     htmlElement.setAttribute('download', filename);
     document.body.appendChild(htmlElement);
     htmlElement.click();

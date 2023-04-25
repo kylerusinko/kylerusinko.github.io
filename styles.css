@@ -199,3 +199,10 @@ input:checked+.slider:before {
     display: inline;
     padding-left: 1%;
 }
+.note {
+    font-style: italic;
+    font-size: smaller;
+}
+.install_link {
+    color: blue;
+}
