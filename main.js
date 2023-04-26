@@ -1,3 +1,9 @@
+// This function is for obtaining the synonyms for a word when the word is 
+// not found in the website that the user is scraping through.
+// It utilizes Datamuse API to obtain the synonyms for a word. 
+// After doing a lot of testing with this function, it is certainly not perfect
+// and I am not sure if it is because of the way I have set it up or because Datamuse API 
+// may not be the strongest API for this purpose.
 async function getSynonyms(word) {
   const apiEndpoint = `https://api.datamuse.com/words?rel_syn=${word}`;
   try {
@@ -13,6 +19,9 @@ async function getSynonyms(word) {
   }
 }
 
+// This function does most of the heavy lifting. It will take the websites,
+// keywords, and whether or not to use synonyms. It then fetches the words
+// in the websites, and returns an array of the words that match the keywords.
 async function scrapeIt(websites, keywords, useSynonyms) {
   const resultArray = [];
 
@@ -20,7 +29,6 @@ async function scrapeIt(websites, keywords, useSynonyms) {
     const response = await fetch(website);
     const html = await response.text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
-
     const content = doc.body.textContent;
     const sentences = content.split(/[.;:]/);
 
@@ -63,6 +71,8 @@ async function scrapeIt(websites, keywords, useSynonyms) {
         }
       }
 
+      // Here it checks to see if the keyword was found in any of the sentences and if
+      // the user wants to use synonyms.
       if (!found && useSynonyms) {
         const synonyms = await getSynonyms(keyword);
         for (const synonym of synonyms) {
@@ -120,13 +130,14 @@ async function scrapeIt(websites, keywords, useSynonyms) {
   return resultArray;
 }
 
+// This function takes an array of websites and a keyword and returns an array into an HTML format
+// for the user to download. 
 // Adapted from https://stackoverflow.com/questions/72490229/how-to-generate-a-download-file-in-javascript
 function downloadHTML(website, resultArray) {
   const matchingResults = resultArray.filter(result => result.website === website);
   if (matchingResults.length === 0) {
     return;
   }
-
   const a = document.createElement('a');
   document.body.appendChild(a);
   a.style = 'display: none';
@@ -137,7 +148,6 @@ function downloadHTML(website, resultArray) {
       let html = '';
       const filename = `${website}_${keyword}.html`;
       const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
-
       const paragraphs = matchingResult.html.match(/<p>.*?<\/p>/gs);
 
       for (const paragraph of paragraphs) {
@@ -145,8 +155,7 @@ function downloadHTML(website, resultArray) {
           html += paragraph.replace(regex, `<b>${keyword}</b>`);
         }
       }
-
-      const blob = new Blob([html], {type: 'text/html'});
+      const blob = new Blob([html], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       a.href = url;
       a.download = filename;
@@ -156,6 +165,8 @@ function downloadHTML(website, resultArray) {
   }
 }
 
+// Main portion of the code where scrapeIt() is called and the scrape button is added.
+// At the bottom, the input fields are reset to be blank after the user clicks the scrape button.
 const scrapeButton = document.getElementById('scrapeButton');
 const output = document.getElementById('output');
 const websitesInput = document.getElementById('websitesInput');
