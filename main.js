@@ -66,13 +66,12 @@ async function scrapeIt(websites, keywords, useSynonyms) {
           const shortenedSentence = sentenceWords.slice(startIndex, endIndex).join(' ');
           sentenceIndices.push({
             index: i,
-            sentence: shortenedSentence
+            sentence: shortenedSentence,
+            keyword: keyword
           });
         }
       }
 
-      // Here it checks to see if the keyword was found in any of the sentences and if
-      // the user wants to use synonyms.
       if (!found && useSynonyms) {
         const synonyms = await getSynonyms(keyword);
         for (const synonym of synonyms) {
@@ -116,7 +115,6 @@ async function scrapeIt(websites, keywords, useSynonyms) {
           }
         }
       }
-
       resultArray.push({
         website: website,
         keyword: keyword,
