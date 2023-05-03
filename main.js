@@ -72,6 +72,8 @@ async function scrapeIt(websites, keywords, useSynonyms) {
         }
       }
 
+      // This code runs only if the keyword was not found and the "Synonyms"
+      // toggle button is enabled.
       if (!found && useSynonyms) {
         const synonyms = await getSynonyms(keyword);
         for (const synonym of synonyms) {
